@@ -21,7 +21,7 @@ const Item = ({ item }) => (
 export default Analytics = ({ navigation }) => {
 	const [option, setOption] = useState(0);
 	const [users, setUsers] = useState([]);
-	const [userLength, setUserLength] = useState(1);
+	const [userLength, setUserLength] = useState(0);
 	const { width } = useWindowDimensions();
 	useEffect(async () => {
 		if (option > 0) {
@@ -54,7 +54,12 @@ export default Analytics = ({ navigation }) => {
 		<View style={styles.container}>
 			<View style={[styles.header, { width, height: width / 4 }]}>
 				<Text style={styles.headText}>Analytics</Text>
-				<TouchableOpacity>
+				<TouchableOpacity
+					onPress={() => {
+						AsyncStorage.removeItem("token");
+						navigation.navigate("Login");
+					}}
+				>
 					<MaterialIcons name="logout" size={20} color="white" />
 				</TouchableOpacity>
 			</View>
